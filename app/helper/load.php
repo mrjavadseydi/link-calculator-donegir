@@ -3,19 +3,19 @@
 use Telegram\Bot\Exceptions\TelegramResponseException;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
-
+require_once __DIR__ . '/keyboard.php';
 if(!function_exists('sendMessage')){
     function sendMessage($arr)
     {
-//        try
-//        {
+        try
+        {
             return Telegram::sendMessage($arr);
-//        }
-//        catch(TelegramResponseException $e)
-//        {
-//
-//            return "user has been blocked!";
-//        }
+        }
+        catch(TelegramResponseException $e)
+        {
+
+            return "user has been blocked!";
+        }
     }
 }
 
@@ -94,4 +94,16 @@ function devLog($update){
         'text'=>print_r($update,true)
     ]);
 }
-
+function set_state($chat_id,$state=null){
+    \Illuminate\Support\Facades\Cache::put($chat_id,$state,now()->addDays(3));
+}
+function get_state($chat_id){
+    return \Illuminate\Support\Facades\Cache::get($chat_id)??null;
+}
+function check_signup($account){
+    $user = \App\Models\Channel::query()->where('account_id',$account)->where('status',1)->first();
+    if ($user){
+        return true;
+    }
+    return false;
+}

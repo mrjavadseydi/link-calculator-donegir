@@ -5,5 +5,8 @@ return [
     'not_fount_channel'=>"channel not found",
     'duplicate_channel'=>"channel duplicate",
     'chose_category'=>"category ra entekhab knid",
-    'after_add'=>'channel add shod , ta taeed hannel sbr knid'
+    'after_add'=>'channel add shod , ta taeed hannel sbr knid',
+    'new_channel'=>"%id \n %username \n %name \n %category \n %user",
+    'decline_channel'=>'taeed nashod',
+    'accept_channel'=>'taeed shod',
 ];

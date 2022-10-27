@@ -79,3 +79,23 @@ function categoryMenu()
 
     return Keyboard::make(['keyboard' => $home, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 }
+if (!function_exists('accept_channel')) {
+    function accept_channel($id)
+    {
+        $arr = [
+            [
+                'text'=>"تایید",
+                'callback_data'=>"ac_".$id
+            ],
+            [
+                'text'=>'رد',
+                'callback_data'=>"de_".$id
+            ]
+        ];
+        return keyboard::make([
+            'inline_keyboard' => [
+                $arr
+            ],
+        ]);
+    }
+}

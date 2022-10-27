@@ -22,5 +22,19 @@ class ChooseCategory extends TelegramOprator
             'text'=>config('robot.after_add'),
             'reply_markup'=>signup()
         ]);
+        foreach (Channel::where('status',0)->where('account_id',$this->user->id)->get() as $channel){
+            $text = config('robot.new_channel');
+            $text = str_replace('%username',$channel->username,$text);
+            $text = str_replace('%name',$channel->name,$text);
+            $text = str_replace('%category',$channel->category,$text);
+            $text = str_replace('%id',$channel->chat_id,$text);
+            $text = str_replace('%user',$this->chat_id,$text);
+
+            sendMessage([
+                'chat_id' => config('telegram.channel_signup'),
+                'text'=>$text,
+                'reply_markup'=>accept_channel($channel->id)
+            ]);
+        }
     }
 }

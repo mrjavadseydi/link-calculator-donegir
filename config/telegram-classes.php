@@ -10,7 +10,7 @@ return[
             \App\Lib\Classes\Start::class,
         ],
         2=>[
-
+            \App\Lib\Classes\Signup\AcceptChannel::class
         ],
         3=>[
 

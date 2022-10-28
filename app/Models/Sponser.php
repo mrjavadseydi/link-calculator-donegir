@@ -9,4 +9,7 @@ class Sponser extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function links(){
+        return $this->hasMany(SponserLink::class);
+    }
 }

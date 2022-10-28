@@ -125,4 +125,17 @@ function get_invite_link_state($channel,$link)
     $http = \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=check&&channel=$channel&&link=$link");
     return $http->body();
 }
+function add_wallet($account_id,$amount,$description=""){
+    $wallet = \App\Models\Wallet::query()->where('chat_id',$account_id)->latest()->first();
+    \App\Models\Wallet::query()->create([
+        'balance'=>$wallet->balance+$amount,
+        'account_id'=>$account_id,
+        'action'=>$amount,
+        'description'=>$description
+    ]);
 
+}
+function get_wallet($account_id){
+    $wallet = \App\Models\Wallet::query()->where('chat_id',$account_id)->latest()->first();
+    return $wallet->balance;
+}

@@ -24,11 +24,20 @@ class ChooseCategory extends TelegramOprator
             'category'=>$this->text
         ]);
         set_state($this->chat_id,"main");
-        sendMessage([
-            'chat_id' => $this->chat_id,
-            'text'=>config('robot.after_add'),
-            'reply_markup'=>signup()
-        ]);
+        if (Channel::where('account_id',$this->user->id)->where('status',1)->first()){
+            sendMessage([
+                'chat_id' => $this->chat_id,
+                'text'=>config('robot.new_channel_added'),
+                'reply_markup'=>mainMenu()
+            ]);
+        }else{
+            sendMessage([
+                'chat_id' => $this->chat_id,
+                'text'=>config('robot.after_add'),
+                'reply_markup'=>signup()
+            ]);
+        }
+
         foreach (Channel::where('status',0)->where('account_id',$this->user->id)->get() as $channel){
             $text = config('robot.new_channel');
             $text = str_replace('%username',$channel->username,$text);

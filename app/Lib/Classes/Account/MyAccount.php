@@ -17,7 +17,8 @@ class MyAccount extends TelegramOprator
     {
         sendMessage([
             'chat_id'=>$this->chat_id,
-            'text'=>config('robot.my_account')
+            'text'=>config('robot.my_account'),
+            'reply_markup'=>account_menu()
         ]);
 
     }

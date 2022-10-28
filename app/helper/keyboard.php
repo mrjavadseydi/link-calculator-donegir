@@ -143,10 +143,10 @@ function choose_channel($account)
 function choose_sponser()
 {
     $arr = [];
-    foreach (\App\Models\Sponser::where('status',1)->get() as $channel) {
+    foreach (\App\Models\Sponser::where('status', 1)->get() as $channel) {
         $arr[] = [
             [
-                'text' => $channel->name ,
+                'text' => $channel->name,
                 'callback_data' => "spselect_" . $channel->id
             ]
 
@@ -161,13 +161,13 @@ function choose_sponser()
 function recive_wallet()
 {
     $arr = [];
-        $arr[] = [
-            [
-                'text' => "برداشت موجودی" ,
-                'callback_data' => "getwallet_user"
-            ]
+    $arr[] = [
+        [
+            'text' => "برداشت موجودی",
+            'callback_data' => "getwallet_user"
+        ]
 
-        ];
+    ];
 
     return keyboard::make([
         'inline_keyboard' => $arr,
@@ -175,27 +175,75 @@ function recive_wallet()
 }
 
 
-
 function payoutMenu()
 {
     $arr = [];
-        $arr[] = [
-            [
-                'text' => "در حال بررسی" ,
-                'callback_data' => "status_0"
-            ],
-            [
-                'text' => "پرداخت شد" ,
-                'callback_data' => "status_1"
-            ],
-            [
-                'text' => "رد شد" ,
-                'callback_data' => "status_2"
-            ],
+    $arr[] = [
+        [
+            'text' => "در حال بررسی",
+            'callback_data' => "status_0"
+        ],
+        [
+            'text' => "پرداخت شد",
+            'callback_data' => "status_1"
+        ],
+        [
+            'text' => "رد شد",
+            'callback_data' => "status_2"
+        ],
 
-        ];
+    ];
 
     return keyboard::make([
         'inline_keyboard' => $arr,
     ]);
+}
+
+function myChannels($id)
+{
+    $arr = [];
+    foreach (\App\Models\Channel::where('account_id', $id)->get() as $channel) {
+        $arr[] = [
+            [
+                'text' => "⚠️ حذف کانال "
+                . $channel->name ,
+                'callback_data' => "dlme_" . $channel->id
+            ]
+
+        ];
+    }
+
+    return keyboard::make([
+        'inline_keyboard' => $arr,
+    ]);
+}
+
+function sure_delete($id)
+{
+    $arr = [];
+    $arr[] = [
+        [
+            'text' => "حذف شود",
+            'callback_data' => "dlac_" . $id
+        ]
+
+    ];
+
+    return keyboard::make([
+        'inline_keyboard' => $arr,
+    ]);
+}
+
+function account_menu()
+{
+    $home = [
+        ['🔸تغییر اطلاعات بانکی🔸'],
+        [
+            '🔸مدیریت کانال🔸', "🔸افزودن کانال🔸"
+        ], [
+            'بازگشت ↪️'
+        ]
+    ];
+
+    return Keyboard::make(['keyboard' => $home, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 }

@@ -22,6 +22,9 @@ class CancelSponser extends TelegramOprator
     {
 
         $sponser = Sponser::query()->where('msg_id',$this->reply_to_message)->first();
+        if (!$sponser){
+            return false;
+        }
         Artisan::call('sponsers:calc');
         $link = SponserLink::where('sponser_id',$sponser->id)->get('channel_id');
         $accounts = Channel::query()->whereIn('id',$link)->get('account_id');

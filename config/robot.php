@@ -18,5 +18,6 @@ return [
     'role'=>"ghavanin",
     'help'=>"help",
     'my_account'=>"my account",
-    'not_fount_category'=>"daste bandi eshtebah"
+    'not_fount_category'=>"daste bandi eshtebah",
+    'new_channel_added'=>"channel shoma add shod, ta zaman taeed sbr knid"
 ];

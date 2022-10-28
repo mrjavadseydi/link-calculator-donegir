@@ -22,10 +22,14 @@ class StatusSponser extends TelegramOprator
     {
 
         $sponser = Sponser::query()->where('msg_id',$this->reply_to_message)->first();
-        $links = SponserLink::query()->where('sponser_id',$sponser->id)->get();
+        if (!$sponser){
+            return false;
+        }
+        $links = SponserLink::query()->where('sponser_id',$sponser->id)->orderBy('usage','desc')->get();
         $str = "تبلیغ : $sponser->name\n";
         foreach ($links as $link){
-            $str .= "کانال : ".Channel::find($link->channel_id)->username."\n";
+            $str .= "نام کانال : ".Channel::find($link->channel_id)->name."\n";
+            $str .= "یوزر نیم کانال : ".Channel::find($link->channel_id)->username."\n";
             $str .= "تعداد  : $link->usage \n";
             $str .= "\n ======== \n";
         }

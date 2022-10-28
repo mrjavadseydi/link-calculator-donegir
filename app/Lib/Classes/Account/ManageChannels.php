@@ -4,13 +4,13 @@ namespace App\Lib\Classes\Account;
 
 use App\Lib\Interfaces\TelegramOprator;
 
-class MyAccount extends TelegramOprator
+class ManageChannels extends TelegramOprator
 {
 
     public function initCheck()
     {
 
-        return ($this->message_type == "message" && $this->text == '👤 حساب کاربری من');
+        return ($this->message_type == "message" && $this->text == '🔸مدیریت کانال🔸');
     }
 
     public function handel()
@@ -18,7 +18,7 @@ class MyAccount extends TelegramOprator
         sendMessage([
             'chat_id'=>$this->chat_id,
             'text'=>config('robot.my_account'),
-            'reply_markup'=>account_menu()
+            'reply_markup'=>myChannels($this->user->id)
         ]);
 
     }

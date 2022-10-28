@@ -39,12 +39,13 @@ class AddSponser extends TelegramOprator
                 $channels = Channel::query()->where('category',$ex[5])->get('account_id');
             }
             foreach ($channels as $channel){
+                $price = number_format($ex[3]);
                 $arr = [
                     'chat_id'=>Account::find($channel->account_id)->chat_id,
                     'text'=>"تبلیغ  جدید اضافه شد\n
                     نام : $ex[0]\n
                     توضیحات : $ex[2]\n
-                    مبلغ : $ex[3]\n
+                    مبلغ :  $price \n
                     محدودیت : $ex[4]"
                 ];
                 SendMessageJob::dispatch($arr);

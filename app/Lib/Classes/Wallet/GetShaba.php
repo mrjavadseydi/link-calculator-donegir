@@ -28,13 +28,13 @@ class GetShaba extends TelegramOprator
                 'chat_id'=>$this->chat_id,
                 'text'=>"شماره شبا با موفقیت ثبت شد",
             ]);
-            $amount = get_wallet($this->user->id);
-            $text = str_replace('%amount', number_format($amount), config('robot.wallet_amount'));
-            sendMessage([
-                'chat_id' => $this->chat_id,
-                'text' => $text,
-                'reply_markup' => recive_wallet()
-            ]);
+//            $amount = get_wallet($this->user->id);
+//            $text = str_replace('%amount', number_format($amount), config('robot.wallet_amount'));
+//            sendMessage([
+//                'chat_id' => $this->chat_id,
+//                'text' => $text,
+//                'reply_markup' => recive_wallet()
+//            ]);
         }
     }
 }

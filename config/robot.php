@@ -17,6 +17,7 @@ return [
     'min_amount'=>"minimum 10000",
     'role'=>"ghavanin",
     'help'=>"help",
+    'support'=>"payam khod ra baray poshtibani bgin",
     'my_account'=>"my account",
     'not_fount_category'=>"daste bandi eshtebah",
     'new_channel_added'=>"channel shoma add shod, ta zaman taeed sbr knid"

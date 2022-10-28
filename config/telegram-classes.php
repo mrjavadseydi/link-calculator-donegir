@@ -20,7 +20,6 @@ return[
             \App\Lib\Classes\Sponser\GetLink::class,
             \App\Lib\Classes\Sponser\GetSponserState::class,
             App\Lib\Classes\Wallet\GetWallet::class,
-//            \App\Lib\Classes\Wallet\AddSponser::class,
             \App\Lib\Classes\Wallet\GetCardName::class,
             \App\Lib\Classes\Wallet\GetCard::class,
             \App\Lib\Classes\Wallet\GetShaba::class,
@@ -39,6 +38,11 @@ return[
             \App\Lib\Classes\Account\ManageChannels::class,
             \App\Lib\Classes\Account\DeleteChannel::class,
             \App\Lib\Classes\Account\DeleteChannelAccept::class,
+
+            \App\Lib\Classes\Support\GetSupport::class,
+            \App\Lib\Classes\Support\ReplySupport::class,
+            \App\Lib\Classes\Support\SupportSend::class,
+
 
             \App\Lib\Classes\Admin\AddSponser::class
 

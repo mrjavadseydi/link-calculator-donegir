@@ -8,8 +8,7 @@ class GetCard extends TelegramOprator
 
     public function initCheck()
     {
-
-        return ($this->message_type=="message"&&get_state($this->chat_id)=="get_card");
+        return ($this->message_type=="message"&&get_state($this->chat_id)=="add_card");
     }
 
     public function handel()
@@ -18,7 +17,7 @@ class GetCard extends TelegramOprator
             sendMessage([
                 'chat_id'=>$this->chat_id,
                 'text'=>"شماره کارت وارد شده صحیح نمی باشد",
-                'reply_markup'=>recive_wallet()
+                'reply_markup'=>backKey()
             ]);
             return;
         }else{
@@ -27,7 +26,7 @@ class GetCard extends TelegramOprator
             sendMessage([
                 'chat_id'=>$this->chat_id,
                 'text'=>"شماره کارت با موفقیت ثبت شد, لطفا نام صاحب کارت را وارد کنید",
-                'reply_markup'=>recive_wallet()
+                'reply_markup'=>backKey()
             ]);
             set_state($this->chat_id,"get_card_name");
         }

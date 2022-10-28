@@ -10,7 +10,7 @@ class GetWallet extends TelegramOprator
     public function initCheck()
     {
 
-        return ($this->message_type == "message" && $this->text == "💰کیف پول من");
+        return ($this->message_type == "message" && $this->text == '💰کیف پول من');
     }
 
     public function handel()

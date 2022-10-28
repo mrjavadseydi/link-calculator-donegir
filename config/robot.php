@@ -14,4 +14,7 @@ return [
     'receive_wallet'=>"mizan mored nazar khod ra vared knid",
     'not_number'=>"lotfan adad vared knid",
     'not_enough'=>"mizan kafi nist",
+    'min_amount'=>"minimum 10000",
+    'role'=>"ghavanin",
+    'help'=>"help",
 ];

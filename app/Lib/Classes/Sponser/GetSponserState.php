@@ -22,7 +22,12 @@ class GetSponserState extends TelegramOprator
                 ->whereIn('sponser_id',Sponser::where('status',1)->pluck('id'))
                 ->get();
 
-
+        if (count($active_sponser)==0){
+            return sendMessage([
+                'chat_id'=>$this->chat_id,
+                'text'=>"شما هیچ تبلیغی فعال ندارید",
+            ]);
+        }
         foreach ($active_sponser as $sponser){
             $text .= "کانال : ";
             $text.=$sponser->channel->name."\n";

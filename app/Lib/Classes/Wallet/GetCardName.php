@@ -19,7 +19,7 @@ class GetCardName extends TelegramOprator
         sendMessage([
             'chat_id'=>$this->chat_id,
             'text'=>"نام صاحب کارت با موفقیت ثبت شد, لطفا شماره شبا حساب خود را وارد کنید",
-            'reply_markup'=>recive_wallet()
+            'reply_markup'=>backKey()
         ]);
         set_state($this->chat_id,"get_shaba");
     }

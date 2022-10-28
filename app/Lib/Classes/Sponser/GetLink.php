@@ -33,7 +33,7 @@ class GetLink extends TelegramOprator
             $ch = Channel::find($key);
 
             if ($value) {
-                if ($sp = SponserLink::where('sponser_id', $key)->where('channel_id', $value)->first()) {
+                if ($sp = SponserLink::where('channel_id', $key)->where('sponser_id', Cache::get('sponser_id'.$this->user->id))->first()) {
                     return sendMessage([
                         'chat_id' => $this->chat_id,
                         'text' => "
@@ -51,7 +51,7 @@ $sp->link",
                     کانال :
 $ch->name \n
                     لینک تبلیغاتی شما  :\n
-$sp->link",
+$link",
                     ]);
                     SponserLink::query()->create([
                         'sponser_id' => $sponser->id,

@@ -29,12 +29,18 @@ class WaitForPay extends TelegramOprator
                 'text'=>config('robot.not_enough'),
             ]);
         }
-        $wallet = add_wallet($this->user->id,-$this->text);
+        if ($this->text<100){
+            return sendMessage([
+                'chat_id'=>$this->chat_id,
+                'text'=>config('robot.min_amount'),
+            ]);
+        }
+        $wallet = add_wallet($this->user->id,-$this->text,"برداشت موجودی");
         $payout = PayOutRequest::query()->create([
             'amount'=>$this->text,
             'status'=>0,
             'account_id'=>$this->user->id,
-            'wallet'=>$wallet->id,
+            'wallet_id'=>$wallet->id,
             'msg_id'=>0
         ]);
         $str = "شماره پیگیری  : ".$payout->id;

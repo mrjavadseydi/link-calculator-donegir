@@ -17,7 +17,15 @@ class ChoseSponser extends TelegramOprator
         set_state($this->chat_id,"get_sponser");
         Cache::forget('active_select' . $this->user->id);
         $text= "";
-        foreach (\App\Models\Sponser::where('status',1)->get() as $channel) {
+        $sponsers = \App\Models\Sponser::where('status',1)->get();
+        if (count($sponsers)==0) {
+            $text = "متاسفانه هیچ تبلیغی در حال حاضر فعال نمی باشد";
+            return sendMessage([
+                'chat_id'=>$this->chat_id,
+                'text'=>$text,
+            ]);
+        }
+        foreach ( $sponsers as $channel) {
             $text .= "
         ▫️ نام تبلیغ: $channel->name
 ▫️ قیمت برای هر نفر دعوت: ".number_format($channel->amount)."

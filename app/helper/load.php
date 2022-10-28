@@ -66,9 +66,9 @@ if (!function_exists('deleteMessage')) {
 if (!function_exists('messageType')) {
     function messageType($arr = [])
     {
-        if (!isset($arr['message']['from']['id']) & !isset($arr['callback_query'])) {
-            die();
-        }
+//        if (!isset($arr['message']['from']['id']) & !isset($arr['callback_query'])) {
+//            die();
+//        }
         if (isset($arr['message']['photo'])) {
             return 'photo';
         } elseif (isset($arr['message']['audio'])) {
@@ -83,6 +83,8 @@ if (!function_exists('messageType')) {
             return 'contact';
         } elseif (isset($arr['message']['text'])) {
             return 'message';
+        }elseif (isset($arr['channel_post'])) {
+            return 'channel_post';
         } else {
             return null;
         }

@@ -41,7 +41,7 @@ class CalcSponsers extends Command
                 $remain = $usage-$link->calc;
                 if ($remain>0){
                     $amount = $remain*$sponser->amount;
-                    add_wallet($link->channel->user_id,$amount,"محاسبه $remain ممبر به نرخ $sponser->amount ");
+                    add_wallet($link->channel->account_id,$amount,"محاسبه $remain ممبر به نرخ $sponser->amount ");
                 }
                 $link->calc = $usage;
                 $link->save();

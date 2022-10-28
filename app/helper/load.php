@@ -126,7 +126,7 @@ function get_invite_link_state($channel,$link)
     return $http->body();
 }
 function add_wallet($account_id,$amount,$description=""){
-    $wallet = \App\Models\Wallet::query()->where('chat_id',$account_id)->latest()->first();
+    $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
     \App\Models\Wallet::query()->create([
         'balance'=>$wallet->balance+$amount,
         'account_id'=>$account_id,
@@ -136,6 +136,6 @@ function add_wallet($account_id,$amount,$description=""){
 
 }
 function get_wallet($account_id){
-    $wallet = \App\Models\Wallet::query()->where('chat_id',$account_id)->latest()->first();
+    $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
     return $wallet->balance;
 }

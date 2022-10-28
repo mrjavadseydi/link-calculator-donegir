@@ -13,6 +13,13 @@ class ChooseCategory extends TelegramOprator
 
     public function handel()
     {
+        if (!in_array($this->text,['category1','category2','category3'])){
+            return sendMessage([
+                'chat_id'=>$this->chat_id,
+                'text'=>config('robot.not_fount_category'),
+                'reply_markup'=>backKey()
+            ]);
+        }
         Channel::where('account_id',$this->user->id)->update([
             'category'=>$this->text
         ]);

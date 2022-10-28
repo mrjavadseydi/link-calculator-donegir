@@ -17,4 +17,6 @@ return [
     'min_amount'=>"minimum 10000",
     'role'=>"ghavanin",
     'help'=>"help",
+    'my_account'=>"my account",
+    'not_fount_category'=>"daste bandi eshtebah"
 ];

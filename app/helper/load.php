@@ -1,69 +1,69 @@
 <?php
 
 use Telegram\Bot\Exceptions\TelegramResponseException;
-use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
+
 require_once __DIR__ . '/keyboard.php';
-if(!function_exists('sendMessage')){
+if (!function_exists('sendMessage')) {
     function sendMessage($arr)
     {
-        try
-        {
+        try {
             return Telegram::sendMessage($arr);
-        }
-        catch(TelegramResponseException $e)
-        {
+        } catch (TelegramResponseException $e) {
 
             return "user has been blocked!";
         }
     }
 }
 
-if(!function_exists('joinCheck')){
-    function joinCheck($chat_id,$user_id)
+if (!function_exists('joinCheck')) {
+    function joinCheck($chat_id, $user_id)
     {
-        try{
-            $data =  Telegram::getChatMember([
-                'user_id'=>$user_id,
-                'chat_id'=>$chat_id
+        try {
+            $data = Telegram::getChatMember([
+                'user_id' => $user_id,
+                'chat_id' => $chat_id
             ]);
-            if($data['ok']==false || $data['result']['status'] == "left" || $data['result']['status']== "kicked"){
-                return  false;
+            if ($data['ok'] == false || $data['result']['status'] == "left" || $data['result']['status'] == "kicked") {
+                return false;
             }
             return true;
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 }
-if (!function_exists('editMessageText')){
-    function editMessageText($arr){
-        try{
+if (!function_exists('editMessageText')) {
+    function editMessageText($arr)
+    {
+        try {
             return Telegram::editMessageText($arr);
-        }catch (Exception $e){
+        } catch (Exception $e) {
 
         }
     }
 }
-if (!function_exists('sendPhoto')){
-    function sendPhoto($arr){
-        try{
+if (!function_exists('sendPhoto')) {
+    function sendPhoto($arr)
+    {
+        try {
             return Telegram::sendPhoto($arr);
-        }catch (Exception $e){
+        } catch (Exception $e) {
 
         }
     }
 }
-if (!function_exists('deleteMessage')){
-    function deleteMessage($arr){
-        try{
+if (!function_exists('deleteMessage')) {
+    function deleteMessage($arr)
+    {
+        try {
             return Telegram::deleteMessage($arr);
-        }catch (Exception $e){
+        } catch (Exception $e) {
 
         }
     }
 }
-if(!function_exists('messageType')) {
+if (!function_exists('messageType')) {
     function messageType($arr = [])
     {
         if (!isset($arr['message']['from']['id']) & !isset($arr['callback_query'])) {
@@ -88,22 +88,41 @@ if(!function_exists('messageType')) {
         }
     }
 }
-function devLog($update){
+function devLog($update)
+{
     sendMessage([
-        'chat_id'=>1389610583,
-        'text'=>print_r($update,true)
+        'chat_id' => 1389610583,
+        'text' => print_r($update, true)
     ]);
 }
-function set_state($chat_id,$state=null){
-    \Illuminate\Support\Facades\Cache::put($chat_id,$state,now()->addDays(3));
+
+function set_state($chat_id, $state = null)
+{
+    \Illuminate\Support\Facades\Cache::put($chat_id, $state, now()->addDays(3));
 }
-function get_state($chat_id){
-    return \Illuminate\Support\Facades\Cache::get($chat_id)??null;
+
+function get_state($chat_id)
+{
+    return \Illuminate\Support\Facades\Cache::get($chat_id) ?? null;
 }
-function check_signup($account){
-    $user = \App\Models\Channel::query()->where('account_id',$account)->where('status',1)->first();
-    if ($user){
+
+function check_signup($account)
+{
+    $user = \App\Models\Channel::where('account_id', $account)->where('status', 1)->first();
+    if ($user) {
         return true;
     }
     return false;
 }
+
+function get_invite_link($channel)
+{
+    $http = \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=create&&channel=$channel");
+    return $http->body();
+}
+function get_invite_link_state($channel,$link)
+{
+    $http = \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=check&&channel=$channel&&link=$link");
+    return $http->body();
+}
+

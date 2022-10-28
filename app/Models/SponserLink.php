@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Account extends Model
+class SponserLink extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-    public function channels(){
-        return $this->hasMany(Channel::class);
+    protected $guarded =[];
+    public function sponser(){
+        return $this->belongsTo(Sponser::class);
     }
 }

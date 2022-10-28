@@ -9,4 +9,5 @@ return [
     'new_channel'=>"%id \n %username \n %name \n %category \n %user",
     'decline_channel'=>'taeed nashod',
     'accept_channel'=>'taeed shod',
+    'sponser_list'=>'sponser list',
 ];

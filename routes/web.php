@@ -16,6 +16,6 @@ use Weidner\Goutte\GoutteFacade;
 */
 
 Route::get('/', function () {
-//    return view('welcome');
+    dd(get_invite_link_state('BetaChatChannel','https://t.me/+1nMnGIaqbGZkMjY8'));
 });
 Route::post('/telegram',[\App\Http\Controllers\TelegramController::class,'init']);

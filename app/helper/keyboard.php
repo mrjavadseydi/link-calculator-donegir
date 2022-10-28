@@ -71,25 +71,26 @@ function categoryMenu()
 {
     $home = [
         [
-            'category1',"category2","category3"
-        ],[
+            'category1', "category2", "category3"
+        ], [
             'بازگشت ↪️'
         ]
     ];
 
     return Keyboard::make(['keyboard' => $home, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 }
+
 if (!function_exists('accept_channel')) {
     function accept_channel($id)
     {
         $arr = [
             [
-                'text'=>"تایید",
-                'callback_data'=>"ac_".$id
+                'text' => "تایید",
+                'callback_data' => "ac_" . $id
             ],
             [
-                'text'=>'رد',
-                'callback_data'=>"de_".$id
+                'text' => 'رد',
+                'callback_data' => "de_" . $id
             ]
         ];
         return keyboard::make([
@@ -98,4 +99,61 @@ if (!function_exists('accept_channel')) {
             ],
         ]);
     }
+}
+function choose_channel($account)
+{
+    $arr = [];
+    $temp_select = [];
+    if (!\Illuminate\Support\Facades\Cache::has('active_select' . $account->id)) {
+        foreach (\App\Models\Channel::where('account_id', $account->id)->where('status', 1)->pluck('id') as $channel) {
+            $temp_select[$channel] = false;
+        }
+        \Illuminate\Support\Facades\Cache::put('active_select' . $account->id, $temp_select, 600);
+
+    }
+    $temp_select = \Illuminate\Support\Facades\Cache::get('active_select' . $account->id);
+    foreach (\App\Models\Channel::where('account_id', $account->id)->where('status', 1)->get() as $channel) {
+        $status = $temp_select[$channel->id] ? '✅' : '❌';
+        $arr[] = [
+            [
+                'text' => $channel->name . $status,
+                'callback_data' => "spchannel_" . $channel->id]
+
+        ];
+    }
+    $arr[] = [
+        [
+            'text' => "انتخاب همه",
+            'callback_data' => "spchannel_all"
+        ]
+
+    ];
+    $arr[] = [
+        [
+            'text' => "دریافت لینک",
+            'callback_data' => "sponser_getlink"
+        ]
+
+    ];
+    return keyboard::make([
+        'inline_keyboard' => $arr,
+    ]);
+}
+
+function choose_sponser()
+{
+    $arr = [];
+    foreach (\App\Models\Sponser::where('status',1)->get() as $channel) {
+        $arr[] = [
+            [
+                'text' => $channel->name ,
+                'callback_data' => "spselect_" . $channel->id
+            ]
+
+        ];
+    }
+
+    return keyboard::make([
+        'inline_keyboard' => $arr,
+    ]);
 }

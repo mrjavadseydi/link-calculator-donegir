@@ -7,8 +7,11 @@ class Start extends TelegramOprator
 
     public function initCheck()
     {
-
-        return ($this->message_type=="message"&&!check_signup($this->user->id)&&!in_array(get_state($this->chat_id),['forward_channel','save_channel','choose_category']));
+        return (
+            $this->message_type=="message"&&
+            !check_signup($this->user->id)&&
+            (!in_array(get_state($this->chat_id),['forward_channel','save_channel','choose_category'])||$this->text==  'بازگشت ↪️')
+        );
     }
 
     public function handel()

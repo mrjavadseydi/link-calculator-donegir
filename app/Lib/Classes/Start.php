@@ -7,14 +7,16 @@ class Start extends TelegramOprator
 
     public function initCheck()
     {
-        return ($this->message_type=="message"&&$this->text=="/start");
+        return ($this->message_type=="message"&&($this->text=="/start"||$this->text=='بازگشت ↪️'));
     }
 
     public function handel()
     {
+        set_state($this->chat_id,"main");
         sendMessage([
             'chat_id' => $this->chat_id,
-            'text'=>'start!'
+            'text'=>'start!',
+            'reply_markup'=>mainMenu()
         ]);
     }
 }

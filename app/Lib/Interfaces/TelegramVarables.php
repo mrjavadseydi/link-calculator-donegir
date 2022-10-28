@@ -13,7 +13,6 @@ abstract class TelegramVarables
 
     public function __construct($update)
     {
-//        devLog($update);
         $this->update = $update;
         $this->message_type = messageType($update);
         if ($this->message_type=="callback_query"){
@@ -26,6 +25,7 @@ abstract class TelegramVarables
             $this->chat_id = $update['message']['chat']['id'] ?? "";
             $this->from_id = $update['message']['from']['id'] ?? "";
         }
+
         $user = Account::query()->firstOrCreate(['chat_id'=>$this->chat_id],[
             'active'=>1,
         ]);

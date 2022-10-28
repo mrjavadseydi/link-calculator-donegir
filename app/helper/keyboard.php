@@ -157,3 +157,45 @@ function choose_sponser()
         'inline_keyboard' => $arr,
     ]);
 }
+
+function recive_wallet()
+{
+    $arr = [];
+        $arr[] = [
+            [
+                'text' => "برداشت موجودی" ,
+                'callback_data' => "getwallet_user"
+            ]
+
+        ];
+
+    return keyboard::make([
+        'inline_keyboard' => $arr,
+    ]);
+}
+
+
+
+function payoutMenu()
+{
+    $arr = [];
+        $arr[] = [
+            [
+                'text' => "در حال بررسی" ,
+                'callback_data' => "status_0"
+            ],
+            [
+                'text' => "پرداخت شد" ,
+                'callback_data' => "status_1"
+            ],
+            [
+                'text' => "رد شد" ,
+                'callback_data' => "status_2"
+            ],
+
+        ];
+
+    return keyboard::make([
+        'inline_keyboard' => $arr,
+    ]);
+}

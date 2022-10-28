@@ -127,7 +127,7 @@ function get_invite_link_state($channel,$link)
 }
 function add_wallet($account_id,$amount,$description=""){
     $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
-    \App\Models\Wallet::query()->create([
+    return \App\Models\Wallet::query()->create([
         'balance'=>$wallet->balance+$amount,
         'account_id'=>$account_id,
         'action'=>$amount,

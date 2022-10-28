@@ -10,4 +10,8 @@ return [
     'decline_channel'=>'taeed nashod',
     'accept_channel'=>'taeed shod',
     'sponser_list'=>'sponser list',
+    'wallet_amount'=>"mojodi shoma : %amount",
+    'receive_wallet'=>"mizan mored nazar khod ra vared knid",
+    'not_number'=>"lotfan adad vared knid",
+    'not_enough'=>"mizan kafi nist",
 ];

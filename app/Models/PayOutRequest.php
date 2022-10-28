@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wallet extends Model
+class PayOutRequest extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function account()
+    public function wallet()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Wallet::class);
     }
 }

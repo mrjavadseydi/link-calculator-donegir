@@ -15,7 +15,12 @@ return[
             \App\Lib\Classes\Sponser\GetSponser::class,
             \App\Lib\Classes\Sponser\UpdateChannel::class,
             \App\Lib\Classes\Sponser\GetLink::class,
-            \App\Lib\Classes\Sponser\GetSponserState::class
+            \App\Lib\Classes\Sponser\GetSponserState::class,
+            \App\Lib\Classes\Wallet\GetCard::class,
+            \App\Lib\Classes\Wallet\GetCardName::class,
+            \App\Lib\Classes\Wallet\GetShaba::class,
+            \App\Lib\Classes\Wallet\SendMonyAmount::class,
+            \App\Lib\Classes\Wallet\WaitForPay::class,
         ],
         3=>[
 

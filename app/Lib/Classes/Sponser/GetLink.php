@@ -38,9 +38,9 @@ class GetLink extends TelegramOprator
                         'chat_id' => $this->chat_id,
                         'text' => "
                     کانال :
-                    $ch->name \n
+$ch->name \n
                     لینک تبلیغاتی شما  :\n
-                     $sp->link",
+$sp->link",
                     ]);
                 } else {
                     $sponser = Sponser::find(Cache::get('sponser_id' . $this->user->id));
@@ -49,9 +49,9 @@ class GetLink extends TelegramOprator
                         'chat_id' => $this->chat_id,
                         'text' => "
                     کانال :
-                    $ch->name \n
+$ch->name \n
                     لینک تبلیغاتی شما  :\n
-                     $sp->link",
+$sp->link",
                     ]);
                     SponserLink::query()->create([
                         'sponser_id' => $sponser->id,

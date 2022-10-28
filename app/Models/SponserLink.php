@@ -12,4 +12,7 @@ class SponserLink extends Model
     public function sponser(){
         return $this->belongsTo(Sponser::class);
     }
+    public function channel(){
+        return $this->belongsTo(Channel::class);
+    }
 }

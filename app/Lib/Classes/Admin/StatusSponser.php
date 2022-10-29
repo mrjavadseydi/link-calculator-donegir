@@ -28,9 +28,14 @@ class StatusSponser extends TelegramOprator
         $links = SponserLink::query()->where('sponser_id',$sponser->id)->orderBy('usage','desc')->get();
         $str = "تبلیغ : $sponser->name\n";
         foreach ($links as $link){
+            if (!Channel::find($link->channel_id)){
+                continue;
+            }
             $str .= "نام کانال : ".Channel::find($link->channel_id)->name."\n";
             $str .= "یوزر نیم کانال : ".Channel::find($link->channel_id)->username."\n";
             $str .= "تعداد  : $link->usage \n";
+            $str .= "دستور جایزه  : ";
+            $str .= "/reward_$link->id".'_mablagh'."\n";
             $str .= "\n ======== \n";
         }
         sendMessage([

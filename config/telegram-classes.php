@@ -42,7 +42,7 @@ return[
             \App\Lib\Classes\Support\GetSupport::class,
             \App\Lib\Classes\Support\ReplySupport::class,
             \App\Lib\Classes\Support\SupportSend::class,
-
+            \App\Lib\Classes\Admin\RewardUser::class,
 
             \App\Lib\Classes\Admin\AddSponser::class
 

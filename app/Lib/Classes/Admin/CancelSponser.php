@@ -26,12 +26,26 @@ class CancelSponser extends TelegramOprator
             return false;
         }
         Artisan::call('sponsers:calc');
+        $links = SponserLink::query()->where('sponser_id',$sponser->id)->orderBy('usage','desc')->get();
+        $str = "تبلیغ : $sponser->name\n";
+        foreach ($links as $link){
+            $str .= "نام کانال : ".Channel::find($link->channel_id)->name."\n";
+            $str .= "یوزر نیم کانال : ".Channel::find($link->channel_id)->username."\n";
+            $str .= "تعداد  : $link->usage \n";
+            $str .= "دستور جایزه  : ";
+            $str .= "/reward_$link->id".'_mablagh'."\n";
+            $str .= "\n ======== \n";
+        }
+        sendMessage([
+            'chat_id'=>$this->chat_id,
+            'text'=>$str
+        ]);
         $link = SponserLink::where('sponser_id',$sponser->id)->get('channel_id');
         $accounts = Channel::query()->whereIn('id',$link)->get('account_id');
         foreach ($accounts as $account){
             $arr = [
                 'chat_id'=>Account::find($account->account_id)->chat_id,
-                'text'=>"تبلیغ  $sponser->name لغو شد"
+                'text'=>"تبلیغ  $sponser->name  به اتمام رسید "
             ];
             SendMessageJob::dispatch($arr);
         }

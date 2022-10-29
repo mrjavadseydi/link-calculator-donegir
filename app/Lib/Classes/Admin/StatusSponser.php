@@ -37,6 +37,13 @@ class StatusSponser extends TelegramOprator
             $str .= "دستور جایزه  : ";
             $str .= "/reward_$link->id".'_mablagh'."\n";
             $str .= "\n ======== \n";
+            if (strlen($str)>3000){
+                sendMessage([
+                    'chat_id'=>$this->chat_id,
+                    'text'=>$str
+                ]);
+                $str = "";
+            }
         }
         sendMessage([
             'chat_id'=>$this->chat_id,

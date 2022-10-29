@@ -15,7 +15,7 @@ class StatusSponser extends TelegramOprator
     public function initCheck()
     {
 
-        return ($this->message_type=="channel_post"&&$this->chat_id==config('telegram.sponsers')&&$this->text=="/status");
+        return ($this->message_type=="channel_post"&&$this->chat_id==config('telegram.sponsers')&&$this->text=="/detail");
     }
 
     public function handel()

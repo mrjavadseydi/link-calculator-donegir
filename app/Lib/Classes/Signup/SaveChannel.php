@@ -3,12 +3,14 @@ namespace App\Lib\Classes\Signup;
 use App\Lib\Interfaces\TelegramOprator;
 use App\Models\Channel;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class SaveChannel extends TelegramOprator
 {
 
     public function initCheck()
     {
+//        devLog($this->update);
         return (get_state($this->chat_id)=="save_channel");
     }
 
@@ -31,7 +33,7 @@ class SaveChannel extends TelegramOprator
                 'chat_id'=>$channel_id,
                 'name'=>$channel_title,
             ]);
-        }elseif(isset($this->update['message']['entities'][0]['type'])&&$this->update['message']['entities'][0]['type']=="mention"){
+        }elseif(str_starts_with($this->text,'https://t.me/')||(isset($this->update['message']['entities'][0]['type'])&&$this->update['message']['entities'][0]['type']=="mention")){
             if (Channel::where('username',$this->text)->exists()){
                 return sendMessage([
                     'chat_id'=>$this->chat_id,

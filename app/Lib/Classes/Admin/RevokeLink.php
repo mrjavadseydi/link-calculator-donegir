@@ -25,7 +25,8 @@ class RevokeLink extends TelegramOprator
             return false;
         }
         $channel = $sponser->sponser->username;
-        \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=check&&channel=$channel&&link=$link");
+        devLog("https://00dev.ir/api/api.php?type=revoke&&channel=$channel&&link=$link");
+        \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=revoke&channel=$channel&link=$link");
         sendMessage([
             'chat_id'=>$this->chat_id,
             'text'=>'لینک غیرفعال شد'

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Lib\Classes\Admin\FullStatusSponser;
 
 return[
     'classes'=>[
@@ -46,6 +47,7 @@ return[
             \App\Lib\Classes\Wallet\GetWalletDetail::class,
             \App\Lib\Classes\Admin\RevokeLink::class,
             \App\Lib\Classes\Admin\SendShot::class,
+            FullStatusSponser::class,
 
             \App\Lib\Classes\Admin\AddSponser::class
 

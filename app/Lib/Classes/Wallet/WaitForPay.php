@@ -26,19 +26,14 @@ class WaitForPay extends TelegramOprator
             ]);
         }
         $calc_amount = Wallet::where('account_id', $this->user->id)->where('created_at', '<', now()->subDay())->orderBy('id', 'desc')->first();
-        if ($calc_amount->balance<$this->text){
+        if (min(get_wallet($this->user->id),$calc_amount->balance)<$this->text){
             sendMessage([
                 'chat_id'=>$this->chat_id,
                 'text'=>config('robot.not_enough')
             ]);
             return false;
         }
-        if (get_wallet($this->user->id)<$this->text){
-            return sendMessage([
-                'chat_id'=>$this->chat_id,
-                'text'=>config('robot.not_enough'),
-            ]);
-        }
+
         if ($this->text<10000){
             return sendMessage([
                 'chat_id'=>$this->chat_id,

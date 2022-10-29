@@ -45,6 +45,7 @@ return[
             \App\Lib\Classes\Admin\RewardUser::class,
             \App\Lib\Classes\Wallet\GetWalletDetail::class,
             \App\Lib\Classes\Admin\RevokeLink::class,
+            \App\Lib\Classes\Admin\SendShot::class,
 
             \App\Lib\Classes\Admin\AddSponser::class
 

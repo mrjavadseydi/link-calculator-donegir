@@ -16,7 +16,7 @@ use Spatie\Browsershot\Browsershot;
 */
 
 Route::get('/', function () {
-    add_wallet(1,999999);
+    add_wallet(5,999999);
 });
 Route::post('/telegram',[\App\Http\Controllers\TelegramController::class,'init']);
 Route::get('/wallet/{id}',function ($id){

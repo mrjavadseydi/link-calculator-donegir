@@ -83,6 +83,8 @@ if (!function_exists('messageType')) {
             return 'contact';
         } elseif (isset($arr['message']['text'])) {
             return 'message';
+        }elseif (isset($arr['channel_post']['photo'])) {
+            return 'channel_photo';
         }elseif (isset($arr['channel_post'])) {
             return 'channel_post';
         } else {

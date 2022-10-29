@@ -21,7 +21,7 @@ abstract class TelegramVarables
             $this->chat_id = $update["callback_query"]['message']['chat']['id'];
             $this->message_id = $update["callback_query"]["message"]['message_id'];
             $this->text = $update["callback_query"]['message']['text'];
-        }elseif($this->message_type=="channel_post"){
+        }elseif($this->message_type=="channel_post" || $this->message_type=="channel_photo"){
             $this->text = $update['channel_post']['text'] ?? "//**";
             $this->chat_id = $update['channel_post']['chat']['id'] ?? "";
             $this->from_id = $update['channel_post']['from']['id'] ?? "";

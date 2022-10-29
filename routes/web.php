@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Weidner\Goutte\GoutteFacade;
-
+use Spatie\Browsershot\Browsershot;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,9 @@ use Weidner\Goutte\GoutteFacade;
 */
 
 Route::get('/', function () {
-    dd(get_invite_link_state('BetaChatChannel','https://t.me/+1nMnGIaqbGZkMjY8'));
+    add_wallet(1,999999);
 });
 Route::post('/telegram',[\App\Http\Controllers\TelegramController::class,'init']);
+Route::get('/wallet/{id}',function ($id){
+    return view('WalletAdd');
+})->name('wallet');

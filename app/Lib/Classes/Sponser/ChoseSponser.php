@@ -28,7 +28,7 @@ class ChoseSponser extends TelegramOprator
         foreach ( $sponsers as $channel) {
             $text .= "
         ▫️ نام تبلیغ: $channel->name
-▫️ قیمت برای هر نفر دعوت: ".number_format($channel->amount)."
+▫️ قیمت برای هر نفر دعوت: ".number_format($channel->amount)." تومان
 ▫️ کد تبلیغ: #$channel->id
 ▫️ توضیحات:
 $channel->description

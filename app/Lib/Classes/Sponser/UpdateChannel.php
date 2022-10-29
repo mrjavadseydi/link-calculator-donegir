@@ -20,10 +20,14 @@ class UpdateChannel extends TelegramOprator
     {
         $temp_select = \Illuminate\Support\Facades\Cache::get('active_select' . $this->user->id);
         $ex = explode("_",$this->data);
+        if (!is_array($temp_select)){
+            $temp_select = [];
+        }
         if ($ex[1]!="all"){
             $temp_select[$ex[1]] = !$temp_select[$ex[1]] ;
 
         } else{
+
             foreach ($temp_select as $key => $value) {
                 $temp_select[$key] = true;
             }

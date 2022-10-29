@@ -9,4 +9,7 @@ class Prize extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function sponser(){
+        return $this->belongsTo(Sponser::class);
+    }
 }

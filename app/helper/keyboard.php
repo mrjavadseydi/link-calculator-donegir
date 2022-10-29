@@ -160,12 +160,29 @@ function choose_sponser()
 
 function recive_wallet()
 {
-    $arr = [];
-    $arr[] = [
+    $arr = [
         [
-            'text' => "برداشت موجودی",
-            'callback_data' => "getwallet_user"
-        ]
+            [
+                'text' => "برداشت موجودی",
+                'callback_data' => "getwallet_user"
+            ]
+        ],
+        [
+            [
+                'text' => "جزئیات واریزی",
+                'callback_data' => "wallet_add"
+            ],
+            [
+                'text' => "جزئیات برداشت",
+                'callback_data' => "wallet_mines"
+            ],
+        ],
+        [
+            [
+                'text' => "جزئیات جایزه",
+                'callback_data' => "wallet_prize"
+            ]
+        ],
 
     ];
 
@@ -206,7 +223,7 @@ function myChannels($id)
         $arr[] = [
             [
                 'text' => "⚠️ حذف کانال "
-                . $channel->name ,
+                    . $channel->name,
                 'callback_data' => "dlme_" . $channel->id
             ]
 

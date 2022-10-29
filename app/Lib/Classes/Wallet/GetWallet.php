@@ -25,7 +25,7 @@ class GetWallet extends TelegramOprator
         } else {
 
             $amount = get_wallet($this->user->id);
-            $text = str_replace('%amount', number_format($amount), config('robot.wallet_amount'));
+            $text = str_replace('%amount', number_format($amount). " تومان ", config('robot.wallet_amount'));
             sendMessage([
                 'chat_id' => $this->chat_id,
                 'text' => $text,

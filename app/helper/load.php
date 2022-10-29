@@ -127,13 +127,14 @@ function get_invite_link_state($channel,$link)
     $http = \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=check&&channel=$channel&&link=$link");
     return $http->body();
 }
-function add_wallet($account_id,$amount,$description=""){
+function add_wallet($account_id,$amount,$description="",$sp_id=null){
     $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
     return \App\Models\Wallet::query()->create([
         'balance'=>$wallet->balance+$amount,
         'account_id'=>$account_id,
         'action'=>$amount,
-        'description'=>$description
+        'description'=>$description,
+        'sponser_id'=>$sp_id
     ]);
 
 }

@@ -3,10 +3,8 @@
 namespace App\Lib\Classes\Wallet;
 
 use App\Lib\Interfaces\TelegramOprator;
-use App\Models\Channel;
-use App\Models\Sponser;
-use App\Models\SponserLink;
-use Illuminate\Support\Facades\Cache;
+use App\Models\PayOutRequest;
+use App\Models\Wallet;
 
 class SendMonyAmount extends TelegramOprator
 {
@@ -28,11 +26,21 @@ class SendMonyAmount extends TelegramOprator
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id
         ]);
-       sendMessage([
-           'chat_id'=>$this->chat_id,
-           'text'=>config('robot.receive_wallet'),
-           'reply_markup'=>backKey()
-       ]);
-       set_state($this->chat_id,'receive_wallet');
+        $last_payout = PayOutRequest::query()->where('account_id', $this->user->id)
+            ->where('created_at', '>', now()->subDay())->first();
+        if ($last_payout) {
+            sendMessage([
+                'chat_id' => $this->chat_id,
+                'text' => 'شما در 24 ساعت گذشته درخواست پرداخت داشته اید'
+            ]);
+            return false;
+        }
+        $calc_amount = Wallet::where('account_id', $this->user->id)->where('created_at', '<', now()->subDay())->orderBy('id', 'desc')->first();
+        sendMessage([
+            'chat_id' => $this->chat_id,
+            'text' => config('robot.receive_wallet'). "\n مبلغ قابل برداشت : " . number_format($calc_amount->balance) . " تومان",
+            'reply_markup' => backKey()
+        ]);
+        set_state($this->chat_id, 'receive_wallet');
     }
 }

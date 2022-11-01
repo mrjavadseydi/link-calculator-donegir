@@ -6,8 +6,13 @@ use App\Lib\Classes\Admin\FullStatusSponser;
 return[
     'classes'=>[
         1=>[
+
             \App\Lib\Classes\Signup\Start::class,
             \App\Lib\Classes\Back::class,
+            \App\Lib\Classes\Support\SupportSend::class,
+
+            \App\Lib\Classes\Support\GetSupport::class,
+            \App\Lib\Classes\Support\ReplySupport::class,
             \App\Lib\Classes\Signup\ForwardChannel::class,
             \App\Lib\Classes\Signup\SaveChannel::class,
             \App\Lib\Classes\Signup\ChooseCategory::class,
@@ -39,10 +44,8 @@ return[
             \App\Lib\Classes\Account\ManageChannels::class,
             \App\Lib\Classes\Account\DeleteChannel::class,
             \App\Lib\Classes\Account\DeleteChannelAccept::class,
-
-            \App\Lib\Classes\Support\GetSupport::class,
-            \App\Lib\Classes\Support\ReplySupport::class,
-            \App\Lib\Classes\Support\SupportSend::class,
+            \App\Lib\Classes\Account\GetSponserHistory::class,
+            \App\Lib\Classes\Admin\FullStatusSponserWithDiff::class,
             \App\Lib\Classes\Admin\RewardUser::class,
             \App\Lib\Classes\Wallet\GetWalletDetail::class,
             \App\Lib\Classes\Admin\RevokeLink::class,

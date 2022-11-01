@@ -34,6 +34,9 @@ class GetWalletDetail extends TelegramOprator
 
             $wallets = Wallet::where('account_id',$this->user->id)->where('action','>',0)->where('sponser_id','!=',null)->groupBy('sponser_id')->get('sponser_id');
             foreach ($wallets as $wallet){
+                if (!Sponser::find($wallet->sponser_id)){
+                    continue;
+                }
                 $mablagh = Wallet::where('account_id',$this->user->id)
                     ->where('action','>',0)->where('sponser_id',$wallet->sponser_id)->sum('action');
                 $last = Wallet::where('account_id',$this->user->id)

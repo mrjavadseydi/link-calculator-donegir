@@ -12,12 +12,20 @@ class Start extends TelegramOprator
 
     public function handel()
     {
-        set_state($this->chat_id,"main");
-        sendMessage([
-            'chat_id' => $this->chat_id,
-            'text'=>'با لمس کردن دکمه چهارخانه، کیبورد داخلی باز خواهد شد و شما به راحتی به قسمت های مختلف ربات دسترسی خواهید داشت.
-',
-            'reply_markup'=>mainMenu()
-        ]);
+        if (!check_signup($this->user->id)){
+            set_state($this->chat_id,"forward_channel");
+            sendMessage([
+                'chat_id' => $this->chat_id,
+                'text'=>config('robot.signup'),
+                'reply_markup'=>signup()
+            ]);
+        }else{
+            set_state($this->chat_id,"main");
+            sendMessage([
+                'chat_id' => $this->chat_id,
+                'text'=>'با لمس کردن دکمه چهارخانه، کیبورد داخلی باز خواهد شد و شما به راحتی به قسمت های مختلف ربات دسترسی خواهید داشت.',
+                'reply_markup'=>mainMenu()
+            ]);
+        }
     }
 }

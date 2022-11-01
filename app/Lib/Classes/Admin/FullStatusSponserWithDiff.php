@@ -9,13 +9,13 @@ use App\Models\SponserLink;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 
-class FullStatusSponser extends TelegramOprator
+class FullStatusSponserWithDiff extends TelegramOprator
 {
 
     public function initCheck()
     {
 
-        return ($this->message_type=="channel_post"&&$this->chat_id==config('telegram.sponsers')&&$this->text=="/status");
+        return ($this->message_type=="channel_post"&&$this->chat_id==config('telegram.sponsers')&&$this->text=="/diff");
     }
 
     public function handel()
@@ -33,7 +33,6 @@ class FullStatusSponser extends TelegramOprator
         $str = "تبلیغ : $sponser->name\n\n";
         $link_count = count($links);
         $all_usage = $links->sum('usage');
-        $money = number_format($links->sum('calc') * $sponser->amount);
         $amount = number_format($sponser->amount)." تومان ";
         $total = 0;
         foreach ($links as $link){
@@ -44,11 +43,11 @@ class FullStatusSponser extends TelegramOprator
                 $total += $usage;
             }
         }
+        $money = number_format($total * $sponser->amount);
+
         $str.="🔴 تعداد لینک های ساخته شده : $link_count
 
-☑️تعداد ورود به لینک : $all_usage
-
-🟥اختلاف : $total
+☑️تعداد ورود به لینک : $total
 
 💶 مبلغ هر ورود : $amount
 

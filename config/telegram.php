@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'channel_signup'=>-1001704120486,
-    'payout'=>-1001704120486,
-    'sponsers'=>-1001704120486,
-    'support'=>-691366571,
+    'channel_signup'=>-1001592367736,
+    'payout'=>-1001853625477,
+    'sponsers'=>-1001613553013,
+    'support'=>-1001184824470,
     /*
     |--------------------------------------------------------------------------
     | Your Telegram Bots
@@ -38,7 +38,7 @@ return [
     'bots'                         => [
         'mybot' => [
             'username'            => 'TelegramBot',
-            'token'               => env('TELEGRAM_BOT_TOKEN', '1723203368:AAEjaegV0A1bvkaN5yJ67WjGt4C1cLFpQHY'),
+            'token'               => env('TELEGRAM_BOT_TOKEN', '5326421086:AAF3Y3tMCgJ1GC4O9EAsMiNssG6DDA_rDPM'),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
             'commands'            => [

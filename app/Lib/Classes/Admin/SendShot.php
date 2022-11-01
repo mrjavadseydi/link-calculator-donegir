@@ -14,7 +14,7 @@ class SendShot extends TelegramOprator
 
     public function initCheck()
     {
-        return ($this->message_type == "channel_photo" && $this->chat_id == config('telegram.sponsers') && isset($this->update['channel_post']['reply_to_message']));
+        return ($this->message_type == "channel_photo" && $this->chat_id == config('telegram.payout') && isset($this->update['channel_post']['reply_to_message']));
     }
 
     public function handel()

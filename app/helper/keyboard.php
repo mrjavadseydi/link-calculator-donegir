@@ -219,7 +219,7 @@ function payoutMenu()
 function myChannels($id)
 {
     $arr = [];
-    foreach (\App\Models\Channel::where('account_id', $id)->get() as $channel) {
+    foreach (\App\Models\Channel::where('account_id', $id)->where('status',1)->get() as $channel) {
         $arr[] = [
             [
                 'text' => "⚠️ حذف کانال "
@@ -256,7 +256,7 @@ function account_menu()
     $home = [
         ['🔸تغییر اطلاعات بانکی🔸'],
         [
-            '🔸مدیریت کانال🔸', "🔸افزودن کانال🔸"
+            '🔸مدیریت کانال🔸', "🔸افزودن کانال🔸","🔸سابقه تبلیغات🔸"
         ], [
             'بازگشت ↪️'
         ]

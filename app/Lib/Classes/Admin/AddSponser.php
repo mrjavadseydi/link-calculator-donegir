@@ -19,32 +19,43 @@ class AddSponser extends TelegramOprator
 
     public function handel()
     {
+        try {
+            $ex = explode("\n", $this->text);
+            $sponser = Sponser::query()->create([
+                'name' => $ex[0],
+                'username' => $ex[1],
+                'description' => $ex[2],
+                'amount' => $ex[3],
+                'limit' => $ex[4],
+                'msg_id' => $this->message_id
+            ]);
+            sendMessage([
+                'chat_id' => $this->chat_id,
+                'text' => "تبلیغ با موفقیت اضافه شد"
+            ]);
+        }catch (\Exception $e){
+            devLog($e->getMessage());
+            return false;
+        }
 
-        $ex = explode("\n", $this->text);
-        Sponser::query()->create([
-            'name' => $ex[0],
-            'username' => $ex[1],
-            'description' => $ex[2],
-            'amount' => $ex[3],
-            'limit' => $ex[4],
-            'msg_id' => $this->message_id
-        ]);
-        sendMessage([
-            'chat_id' => $this->chat_id,
-            'text' => "تبلیغ با موفقیت اضافه شد"
-        ]);
         if (isset($ex[5])) {
             $channels = Channel::query()->groupBy('account_id')->get('account_id');
 
             foreach ($channels as $channel) {
-                $price = number_format($ex[3]);
+                $amount = number_format($ex[3]);
+                $id = $sponser->id;
+                $tabligh = $sponser->name;
+
+                $text = "🔊تبلیغ جدید فعال شد
+
+🎯کد تبلیغ  : #$id
+
+🔶نام تبلیغ  :  $tabligh
+
+💰مبلغ به ازای هر نفر :  $amount تومان ";
                 $arr = [
                     'chat_id' => Account::find($channel->account_id)->chat_id,
-                    'text' => "تبلیغ  جدید اضافه شد\n
-                    نام : $ex[0]\n
-                    توضیحات : $ex[2]\n
-                    مبلغ :  $price \n
-                    محدودیت : $ex[4]"
+                    'text' =>$text
                 ];
                 SendMessageJob::dispatch($arr);
             }

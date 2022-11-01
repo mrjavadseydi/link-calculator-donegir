@@ -16,7 +16,12 @@ use Spatie\Browsershot\Browsershot;
 */
 
 Route::get('/', function () {
-    add_wallet(5,999999);
+    foreach (\App\Models\Channel::all() as $channel){
+
+        $channel->update([
+            'name'=>$channel->username,
+        ]);
+    }
 });
 Route::post('/telegram',[\App\Http\Controllers\TelegramController::class,'init']);
 Route::get('/wallet/{id}',function ($id){

@@ -10,7 +10,7 @@ if (!function_exists('sendMessage')) {
         try {
             return Telegram::sendMessage($arr);
         } catch (TelegramResponseException $e) {
-
+            devLog($e->getMessage());
             return "user has been blocked!";
         }
     }
@@ -119,9 +119,9 @@ function check_signup($account)
     return false;
 }
 
-function get_invite_link($channel)
+function get_invite_link($channel,$limit=false)
 {
-    $http = \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=create&&channel=$channel");
+    $http = \Illuminate\Support\Facades\Http::get("https://00dev.ir/api/api.php?type=create&&channel=$channel&limit=$limit");
     return $http->body();
 }
 function get_invite_link_state($channel,$link)
@@ -143,4 +143,10 @@ function add_wallet($account_id,$amount,$description="",$sp_id=null){
 function get_wallet($account_id){
     $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
     return $wallet->balance;
+}
+function revoke_link($username,$link){
+    $link = str_replace('https://t.me/+','',$link);
+    $link = str_replace('https%3A%2F%2Ft.me%2F%2B','',$link);
+//    devLog("http://78.111.85.14:9091/revoke/$username/$link");
+    $http = \Illuminate\Support\Facades\Http::get("http://78.111.85.14:9091/revoke/$username/$link");
 }

@@ -23,7 +23,7 @@ class DeleteChannelAccept extends TelegramOprator
     public function handel()
     {
         $ex = explode("_", $this->data);
-        $channel =  Channel::find($ex[1])->delete();
+        $channel =  Channel::where('id',$ex[1])->delete();
         deleteMessage([
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id

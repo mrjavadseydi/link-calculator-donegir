@@ -19,7 +19,8 @@ class GetWallet extends TelegramOprator
             set_state($this->chat_id,'add_card');
             sendMessage([
                 'chat_id' => $this->chat_id,
-                'text' => "لطفا شماره کارت ۱۶ رقمی خود را ارسال کنید",
+                'text' => "لطفا شماره کارت خودرا بدون فاصله به صورت لاتین وارد کنید, نمونه :
+6063835791450324",
                 'reply_markup' => backKey()
             ]);
         } else {

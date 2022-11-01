@@ -30,7 +30,7 @@ class SendMonyAmount extends TelegramOprator
         $calc_amount = Wallet::where('account_id', $this->user->id)->where('created_at', '<', now()->subDay())->orderBy('id', 'desc')->first();
         sendMessage([
             'chat_id' => $this->chat_id,
-            'text' => config('robot.receive_wallet'). "\n مبلغ قابل برداشت : " . number_format(min(get_wallet($this->user->id),$calc_amount->balance)) . " تومان",
+            'text' => config('robot.receive_wallet'). "\n مبلغ قابل برداشت : " . number_format(min(get_wallet($this->user->id),$calc_amount->balance??0)) . " تومان",
             'reply_markup' => backKey()
         ]);
         set_state($this->chat_id, 'receive_wallet');

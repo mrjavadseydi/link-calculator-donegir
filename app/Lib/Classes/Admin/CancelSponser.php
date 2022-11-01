@@ -1,5 +1,6 @@
 <?php
 namespace App\Lib\Classes\Admin;
+use App\Jobs\RevokeLinksJob;
 use App\Jobs\SendMessageJob;
 use App\Lib\Interfaces\TelegramOprator;
 use App\Models\Account;
@@ -21,12 +22,15 @@ class CancelSponser extends TelegramOprator
     public function handel()
     {
 
-        $sponser = Sponser::query()->where('msg_id',$this->reply_to_message)->first();
+        $sponser = Sponser::query()->where('msg_id',$this->reply_to_message)->where('status',1)->first();
         if (!$sponser){
             return false;
         }
         Artisan::call('sponsers:calc');
         $links = SponserLink::query()->where('sponser_id',$sponser->id)->get();
+        foreach ($links as $link){
+            RevokeLinksJob::dispatch($sponser->username,$link->link);
+        }
         $str = "تبلیغ : $sponser->name\n\n";
         $link_count = count($links);
         $all_usage = $links->sum('usage');
@@ -43,10 +47,7 @@ class CancelSponser extends TelegramOprator
             'chat_id'=>$this->chat_id,
             'text'=>$str
         ]);
-        sendMessage([
-            'chat_id'=>$this->chat_id,
-            'text'=>$str
-        ]);
+
         $link = SponserLink::where('sponser_id',$sponser->id)->get('channel_id');
         $accounts = Channel::query()->whereIn('id',$link)->get('account_id');
         foreach ($accounts as $account){

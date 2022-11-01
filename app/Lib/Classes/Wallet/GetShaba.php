@@ -26,7 +26,7 @@ class GetShaba extends TelegramOprator
             $this->user->save();
             sendMessage([
                 'chat_id'=>$this->chat_id,
-                'text'=>"شماره شبا با موفقیت ثبت شد",
+                'text'=>"شماره شبا با موفقیت ثبت شد .جهت بازگشت به منو اصلی روی دکمه بازگشت کلیک کنید",
             ]);
 //            $amount = get_wallet($this->user->id);
 //            $text = str_replace('%amount', number_format($amount), config('robot.wallet_amount'));

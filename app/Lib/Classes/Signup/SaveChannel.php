@@ -42,7 +42,7 @@ class SaveChannel extends TelegramOprator
                 'chat_id' => $channel_id,
                 'name' => $channel_title,
             ]);
-            $text =  '<a href="tg://user?id=' . $this->chat_id . '">' . $this->chat_id . '</a>'."\n".config('robot.new_channel');
+            $text =  config('robot.new_channel');
 
             $text = str_replace('%username', $channel->username, $text);
             $text = str_replace('%name', $channel->name, $text);
@@ -52,7 +52,7 @@ class SaveChannel extends TelegramOprator
 
             sendMessage([
                 'chat_id' => config('telegram.channel_signup'),
-                'text' => $text,
+                'text' => '<a href="tg://user?id=' . $this->chat_id . '">' . $this->chat_id . '</a>'."\n".$text,
                 'reply_markup' => accept_channel($channel->id),
                 'parse_mode' => 'HTML'
             ]);
@@ -78,7 +78,7 @@ class SaveChannel extends TelegramOprator
                     'status' => 0
                 ]);
 
-                $text =  '<a href="tg://user?id=' . $this->chat_id . '">' . $this->chat_id . '</a>'."\n".config('robot.new_channel');
+                $text = config('robot.new_channel');
 
 
                 $text = str_replace('%username', $channel->username, $text);
@@ -89,7 +89,7 @@ class SaveChannel extends TelegramOprator
 
                 sendMessage([
                     'chat_id' => config('telegram.channel_signup'),
-                    'text' => $text,
+                    'text' => '<a href="tg://user?id=' . $this->chat_id . '">' . $this->chat_id . '</a>'."\n".$text,
                     'reply_markup' => accept_channel($channel->id),
                     'parse_mode' => 'HTML'
                 ]);

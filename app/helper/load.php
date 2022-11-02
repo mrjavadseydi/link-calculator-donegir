@@ -130,9 +130,8 @@ function get_invite_link_state($channel,$link)
     return $http->body();
 }
 function add_wallet($account_id,$amount,$description="",$sp_id=null){
-    $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
     return \App\Models\Wallet::query()->create([
-        'balance'=>$wallet->balance+$amount,
+        'balance'=>get_wallet($account_id)+$amount,
         'account_id'=>$account_id,
         'action'=>$amount,
         'description'=>$description,
@@ -141,12 +140,12 @@ function add_wallet($account_id,$amount,$description="",$sp_id=null){
 
 }
 function get_wallet($account_id){
-    $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->latest()->first();
+    $wallet = \App\Models\Wallet::query()->where('account_id',$account_id)->orderBy('id','desc')->first();
     return $wallet->balance;
 }
 function revoke_link($username,$link){
-    $link = str_replace('https://t.me/+','',$link);
-    $link = str_replace('https%3A%2F%2Ft.me%2F%2B','',$link);
-//    devLog("http://78.111.85.14:9091/revoke/$username/$link");
-    $http = \Illuminate\Support\Facades\Http::get("http://78.111.85.14:9091/revoke/$username/$link");
+    sendMessage([
+        'chat_id'=>config('telegram.revoker'),
+        'text'=>"/revoke_".$username."_".urldecode($link)
+    ]);
 }

@@ -38,7 +38,7 @@ class FullStatusSponserWithDiff extends TelegramOprator
         foreach ($links as $link){
             $usage = get_invite_link_state($sponser->username, $link->link);
             if (empty($usage)) {
-                continue;
+                $total += $link->usage;
             }else{
                 $total += $usage;
             }

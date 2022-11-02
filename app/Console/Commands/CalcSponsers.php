@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\AddWallet;
 use App\Jobs\RevokeLinksJob;
 use App\Jobs\SendMessageJob;
 use App\Models\Sponser;
@@ -35,6 +36,10 @@ class CalcSponsers extends Command
         foreach ($active_sponsers as $sponser) {
             $links = SponserLink::where('sponser_id', $sponser->id)->get();
             foreach ($links as $link) {
+                if ($link->channel==null){
+                    devLog($link);
+                    continue;
+                }
                 $usage = get_invite_link_state($sponser->username, $link->link);
                 if (empty($usage)) {
                     $usage = 0;
@@ -46,7 +51,8 @@ class CalcSponsers extends Command
 
                 $amount = $remain * $sponser->amount;
                 if ($amount!=0){
-                    add_wallet($link->channel->account_id, $amount, "محاسبه $remain ممبر به نرخ $sponser->amount ", $sponser->id);
+                    AddWallet::dispatch($link->channel->account_id, $amount, "محاسبه $remain ممبر به نرخ $sponser->amount ", $sponser->id);
+//                    add_wallet();
 
                 }
                 $link->calc = $usage;

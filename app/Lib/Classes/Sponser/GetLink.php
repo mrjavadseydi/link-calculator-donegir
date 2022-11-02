@@ -29,6 +29,9 @@ class GetLink extends TelegramOprator
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id
         ]);
+        if (!is_array($temp_select)){
+            $temp_select = [];
+        }
         foreach ($temp_select as $key => $value) {
             $ch = Channel::find($key);
 

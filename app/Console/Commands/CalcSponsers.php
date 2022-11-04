@@ -59,15 +59,16 @@ class CalcSponsers extends Command
                 $link->save();
             }
             if ($sponser->limit != -1) {
-                sendMessage([
-                    'chat_id'=>config('telegram.sponsers'),
-                    'text'=>"تبلیغ $sponser->name به محدودیت $sponser->limit رسیده است"
-                ]);
 
                 $sum_usage = $links->sum('usage');
-                if ($sum_usage >= ($sponser->limit-150)) {
+                if ($sum_usage >= ($sponser->limit-50)) {
+                    sendMessage([
+                        'chat_id'=>config('telegram.sponsers'),
+                        'text'=>"تبلیغ $sponser->name به محدودیت $sponser->limit رسیده است"
+                    ]);
+
                     foreach ($links as $link){
-                        RevokeLinksJob::dispatch($sponser->username,$link->link);
+                        revoke_link($sponser->username,$link->link);
                     }
                     $sponser->status = 0;
                     foreach ($links as $link) {

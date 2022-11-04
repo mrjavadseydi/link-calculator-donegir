@@ -16,6 +16,17 @@ use Spatie\Browsershot\Browsershot;
 */
 
 Route::get('/', function () {
+//    sendMessage([
+//        'chat_id'=>config('telegram.payout'),
+//        'text'=>"@AliEmami",
+//        'reply_to_message_id'=>42
+//    ]);
+//    \Telegram\Bot\Laravel\Facades\Telegram::forwardMessage([
+//        'from_chat_id'=>config('telegram.payout'),
+//        'chat_id'=>1389610583,
+//        'message_id'=>42
+//    ]);
+//    add_wallet(8,100000);
     $accounts = \App\Models\Account::all();
     foreach ($accounts as $account){
         $wallet_now = get_wallet($account->id);

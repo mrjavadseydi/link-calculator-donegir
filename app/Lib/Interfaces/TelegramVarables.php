@@ -40,7 +40,7 @@ abstract class TelegramVarables
         ]);
 
         if ($user->active==0){
-            return sendMessage([
+             sendMessage([
                 'chat_id'=>$this->chat_id,
                 'text'=>'شما مسدود شده اید'
             ]);

@@ -52,6 +52,7 @@ return[
             \App\Lib\Classes\Admin\SendShot::class,
             FullStatusSponser::class,
             \App\Lib\Classes\Support\ReplySignup::class,
+            \App\Lib\Classes\Admin\CheckWallet::class,
             \App\Lib\Classes\Admin\AddSponser::class
 
         ]

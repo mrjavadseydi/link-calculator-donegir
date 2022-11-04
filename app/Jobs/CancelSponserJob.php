@@ -57,9 +57,12 @@ class CancelSponserJob implements ShouldQueue
             'text'=>"حذف لینک ها در حال انجام"
         ]);
         foreach ($links as $link) {
-            RevokeLinksJob::dispatch ($sponser->username, $link->link);
+            revoke_link($sponser->username, $link->link);
         }
-
+        sendMessage([
+            'chat_id'=>$this->chat_id,
+            'text'=>"لینک ها همگی غیرفعال شد !در حال حسابرسی ..."
+        ]);
         Artisan::call('sponsers:calc');
         sendMessage([
             'chat_id' => $this->chat_id,

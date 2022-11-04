@@ -36,19 +36,17 @@ class FullStatusSponser extends TelegramOprator
         $money = number_format($links->sum('calc') * $sponser->amount);
         $amount = number_format($sponser->amount)." تومان ";
         $total = 0;
-        foreach ($links as $link){
-            $usage = get_invite_link_state($sponser->username, $link->link);
-            if (empty($usage)) {
-                continue;
-            }else{
-                $total += $usage;
-            }
-        }
+//        foreach ($links as $link){
+//            $usage = get_invite_link_state($sponser->username, $link->link);
+//            if (empty($usage)) {
+//                continue;
+//            }else{
+//                $total += $usage;
+//            }
+//        }
         $str.="🔴 تعداد لینک های ساخته شده : $link_count
 
-☑️تعداد ورود به لینک : $all_usage
-
-🟥اختلاف : $total
+☑️تعداد ورود به لینک : ".$links->sum('calc')."
 
 💶 مبلغ هر ورود : $amount
 

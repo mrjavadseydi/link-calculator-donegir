@@ -25,8 +25,13 @@ class WaitForPay extends TelegramOprator
                 'text'=>config('robot.not_number'),
             ]);
         }
-        $calc_amount = Wallet::where('account_id', $this->user->id)->where('created_at', '<', now()->subDay())->orderBy('id', 'desc')->first();
-        if (min(get_wallet($this->user->id),$calc_amount->balance??0)<$this->text){
+        $calc_amount = Wallet::where('account_id', $this->user->id)->where('created_at', '<', now()->subDay())->orderBy('id', 'desc')
+            ->first()->balance??0;
+        $total_wait = PayOutRequest::where('account_id', $this->user->id)->where('created_at','>',now()->subDay())->sum('amount');
+        $total = $calc_amount - $total_wait;
+        $avaible = min(get_wallet($this->user->id)-$total_wait,$total);
+        $avaible = $avaible<0?0:$avaible;
+        if ($avaible<$this->text){
             sendMessage([
                 'chat_id'=>$this->chat_id,
                 'text'=>config('robot.not_enough')

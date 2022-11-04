@@ -10,7 +10,7 @@ if (!function_exists('sendMessage')) {
         try {
             return Telegram::sendMessage($arr);
         } catch (TelegramResponseException $e) {
-            devLog($e->getMessage());
+//            devLog($e->getMessage());
             return "user has been blocked!";
         }
     }
@@ -146,6 +146,6 @@ function get_wallet($account_id){
 function revoke_link($username,$link){
     sendMessage([
         'chat_id'=>config('telegram.revoker'),
-        'text'=>"/revoke_".$username."_".urldecode($link)
+        'text'=>"/revoke___".$username."___".urldecode($link)
     ]);
 }

@@ -19,6 +19,8 @@ class AddSponser extends TelegramOprator
 
     public function handel()
     {
+        devLog("hete");
+//        die();
         try {
             $ex = explode("\n", $this->text);
             $sponser = Sponser::query()->create([

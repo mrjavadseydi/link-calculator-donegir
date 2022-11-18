@@ -116,7 +116,7 @@ function choose_channel($account)
         $status = $temp_select[$channel->id] ? '✅' : '❌';
         $arr[] = [
             [
-                'text' => $channel->name . $status,
+                'text' => substr($channel->name,0,10) . $status,
                 'callback_data' => "spchannel_" . $channel->id]
 
         ];
@@ -257,6 +257,19 @@ function account_menu()
         ['🔸تغییر اطلاعات بانکی🔸'],
         [
             '🔸مدیریت کانال🔸', "🔸افزودن کانال🔸","🔸سابقه تبلیغات🔸"
+        ], [
+            'بازگشت ↪️'
+        ]
+    ];
+
+    return Keyboard::make(['keyboard' => $home, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+}
+function sponser_state_menu()
+{
+    $home = [
+        ['💠آمار تبلیغات من'],
+        [
+            '❇️ نفرات برتر تبلیغات'
         ], [
             'بازگشت ↪️'
         ]

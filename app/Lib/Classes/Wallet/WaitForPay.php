@@ -68,8 +68,12 @@ class WaitForPay extends TelegramOprator
         $str.="شماره کارت :‌ ".$this->user->card;
         $str.="\n";
         $str.="نام صاحب حساب :‌ ".$this->user->name;
+        $str.="\n";
+        $str.="یوزر نیم : ".'@'.$this->user->username;
+        $str.="\n";
+        $str.="چت ایدی : ".$this->chat_id;
 
-       $msg =  sendMessage([
+        $msg =  sendMessage([
             'chat_id'=>config('telegram.payout'),
             'text'=>$str,
             'reply_markup'=>payoutMenu()

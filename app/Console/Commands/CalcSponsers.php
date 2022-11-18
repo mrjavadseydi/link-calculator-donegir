@@ -51,9 +51,9 @@ class CalcSponsers extends Command
 
                 $amount = $remain * $sponser->amount;
                 if ($amount!=0){
-                    AddWallet::dispatch($link->channel->account_id, $amount, "محاسبه $remain ممبر به نرخ $sponser->amount ", $sponser->id);
-//                    add_wallet();
-
+//                    AddWallet::dispatch($link->channel->account_id, $amount, "محاسبه $remain ممبر به نرخ $sponser->amount ", $sponser->id);
+                    add_wallet($link->channel->account_id, $amount, "محاسبه $remain ممبر به نرخ $sponser->amount ", $sponser->id);
+                    sleep(0.1);
                 }
                 $link->calc = $usage;
                 $link->save();

@@ -12,7 +12,7 @@ return [
     'duplicate_channel'=>"این کانال از قبل ثبت شده",
     'chose_category'=>"category ra entekhab knid",
     'after_add'=>'کانال های شما برای مدیریت ارسال شد، لطفا تا تایید کانال منتظر بمانید',
-    'new_channel'=>"%id \n %username \n %name \n %category \n %user",
+    'new_channel'=>"%id \n %username \n %name \n %category \n %user \n %user_username \n %user_name",
     'decline_channel'=>'کانال شما تایید نشد',
     'accept_channel'=>'کانال های شما تایید شدن',
     'sponser_list'=>'لطفا از لیست زیر کانال های خود را انتخاب کنید',

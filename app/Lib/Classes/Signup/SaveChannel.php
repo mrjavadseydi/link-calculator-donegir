@@ -48,8 +48,9 @@ class SaveChannel extends TelegramOprator
             $text = str_replace('%name', $channel->name, $text);
             $text = str_replace('%category', $channel->category, $text);
             $text = str_replace('%id', $channel->chat_id, $text);
+            $text = str_replace('%user_username', "@".$this->user->username, $text);
+            $text = str_replace('%user_name', $this->user->name, $text);
             $text = str_replace('%user', $this->chat_id, $text);
-
             sendMessage([
                 'chat_id' => config('telegram.channel_signup'),
                 'text' => '<a href="tg://user?id=' . $this->chat_id . '">' . $this->chat_id . '</a>'."\n".$text,
@@ -85,6 +86,8 @@ class SaveChannel extends TelegramOprator
                 $text = str_replace('%name', $channel->name, $text);
                 $text = str_replace('%category', $channel->category, $text);
                 $text = str_replace('%id', $channel->chat_id, $text);
+                $text = str_replace('%user_username',"@". $this->user->username, $text);
+                $text = str_replace('%user_name', $this->user->name, $text);
                 $text = str_replace('%user', $this->chat_id, $text);
 
                 sendMessage([

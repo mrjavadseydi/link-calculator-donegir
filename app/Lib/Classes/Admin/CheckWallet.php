@@ -21,8 +21,16 @@ class CheckWallet extends TelegramOprator
     public function handel()
     {
 
+
         $chat_id = str_replace('/wallet_check ','',$this->text);
         $account = Account::query()->where('chat_id',$chat_id)->first();
+        if(!$account){
+            sendMessage([
+                'chat_id'=>$this->chat_id,
+                'text'=>"کاربری با این شناسه یافت نشد"
+            ]);
+            return false;
+        }
         $text = "موجودی کیف پول : ".number_format(get_wallet($account->id))." تومان";
         $calc_amount = Wallet::where('account_id', $account->id)->where('created_at', '<', now()->subDay())->orderBy('id', 'desc')
             ->first()->balance??0;

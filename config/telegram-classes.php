@@ -31,6 +31,9 @@ return[
             \App\Lib\Classes\Wallet\GetShaba::class,
             \App\Lib\Classes\Wallet\SendMonyAmount::class,
             \App\Lib\Classes\Wallet\WaitForPay::class,
+            \App\Lib\Classes\Signup\RemoveTag::class,
+            \App\Lib\Classes\Sponser\GetMySponserState::class,
+            \App\Lib\Classes\Sponser\GetBestSponserState::class,
         ],
         3=>[
             \App\Lib\Classes\Wallet\ChangePayStatus::class,
